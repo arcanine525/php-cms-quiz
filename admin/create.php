@@ -46,9 +46,10 @@ if(isset($_POST['submit'])){
                                 <input type="text" class="form-control" name="title_quiz">
                             </div>
                             
-                               
+                            <!-- Category -->
                             <div class="form-group">
-                                <select name="cat_title" id="">
+                                <label for="cat_title">Select category: </label>
+                                <select name="cat_title" id="cat_title">
 <?php 
 $query = "SELECT * FROM category";
 $category = $mysqli->query($query) or die($mysqli->error.__Line__);
@@ -56,8 +57,27 @@ $category = $mysqli->query($query) or die($mysqli->error.__Line__);
 while ($row = mysqli_fetch_assoc($category)){
     
     //$cat_id = $row['cat_id'];
-    $cat_title = $row['cat_title'];
+    $cat_title = $row['name'];
     echo "<option value='{$cat_title}'>{$cat_title}</option>";
+
+}
+?>
+                                </select>
+                            </div>
+
+                            <!-- Level -->
+                            <div class="form-group">
+                                <label for="level_title">Select level: </label>
+                                <select name="level_title" id="level_title">
+<?php 
+$query = "SELECT * FROM levels";
+$levels = $mysqli->query($query) or die($mysqli->error.__Line__);
+
+while ($row = mysqli_fetch_assoc($levels)){
+    
+    //$cat_id = $row['cat_id'];
+    $level = $row['name'];
+    echo "<option value='{$level}'>{$level}</option>";
 
 }
 ?>
@@ -66,8 +86,7 @@ while ($row = mysqli_fetch_assoc($category)){
 
                             <div class="form-group">
                                  <label for="quiz_content">Quiz Content</label>
-                                 <textarea class="form-control "name="quiz_content" id="body" cols="30" rows="10">
-                                 </textarea>
+                                 <textarea class="form-control "name="quiz_content" id="body" cols="30" rows="10"></textarea>
                             </div>
 
                             <div class="form-group">

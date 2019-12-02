@@ -32,7 +32,7 @@ $query = "SELECT * FROM quiz WHERE question_number = '".$_GET['n']."' ";
 $quiz_title_score = $mysqli->query($query) or die($mysqli->error.__Line__);
 $row = mysqli_fetch_assoc($quiz_title_score);
 
-//Nazwa quizu jako session
+
 define("quiz_title_score" , $row['title']);
 
 //$quiz_title_score = $row['title'];

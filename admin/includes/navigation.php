@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://localhost/projectq/quiz.php">Project Q</a>
+                <a class="navbar-brand" href="../index.php">Project Q</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -49,6 +49,10 @@
                     
                     <li>
                         <a href="./create_category.php"><i class="fa fa-fw fa-wrench"></i> Add and delete category</a>
+                    </li>
+
+                    <li>
+                        <a href="./create_level.php"><i class="fa fa-fw fa-wrench"></i> Add and delete level</a>
                     </li>
                        
                     <li>

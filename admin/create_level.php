@@ -1,3 +1,4 @@
+<!-- COPY from create_category.php -->
 <?php include("includes/header.php"); ?>
 <?php session_start(); ?>
 <?php ob_start() ?>
@@ -8,7 +9,7 @@ if(isset($_POST['submit'])){
     
     $cat_title = $_POST['cat_title'];
     
-    $query = "INSERT INTO category(name) VALUES('$cat_title')";
+    $query = "INSERT INTO levels(name) VALUES('$cat_title')";
     $insert_row = $mysqli->query($query) or die($mysqli->error.__LINE__);
 
 }
@@ -32,7 +33,7 @@ if(isset($_POST['submit'])){
                     
                     <form action="" method="post" enctype="multipart/form-data">  
                             <h1 class="page-header">
-                                Create quiz category
+                                Create quiz level
                             </h1>
 
                         <div class="col-xs-6">
@@ -40,7 +41,7 @@ if(isset($_POST['submit'])){
                            
                             <form action="" method="post">
                                 <div class="form-group">
-                                   <label for="cat_title">Add Category</label>
+                                   <label for="cat_title">Add level</label>
                                     <input type="text" class="form-control" name="cat_title">
                                 </div>
                                 <div class="form-group">
@@ -58,28 +59,28 @@ if(isset($_POST['submit'])){
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Category Title</th>
+                                        <th>Level Name</th>
                                     </tr>
                                 </thead>
 <?php 
-$query = "SELECT * FROM category";
-$category = $mysqli->query($query) or die($mysqli->error.__Line__);
-while ($row = mysqli_fetch_assoc($category)){
-    $cat_id = $row['id'];
-    $cat_title = $row['name'];
+$query = "SELECT * FROM levels";
+$levels = $mysqli->query($query) or die($mysqli->error.__Line__);
+while ($row = mysqli_fetch_assoc($levels)){
+    $id = $row['id'];
+    $name = $row['name'];
 
     echo "<tr>";
-    echo "<td>{$cat_id}</td>";
-    echo "<td>{$cat_title}</td>";
-    echo "<td> <a href='create_category.php?delete={$cat_id}'> Delete </a> </td>";
+    echo "<td>{$id}</td>";
+    echo "<td>{$name}</td>";
+    echo "<td> <a href='create_level.php?delete={$id}'> Delete </a> </td>";
     echo "</tr>";
 }
 
 if(isset($_GET['delete'])){
     $the_cat_id = $_GET['delete'];
-    $query = "DELETE FROM category WHERE id = {$the_cat_id}";
+    $query = "DELETE FROM levels WHERE id = {$the_cat_id}";
     $delete_query = $mysqli->query($query) or die($mysqli->error.__Line__);
-    header("Location: create_category.php");
+    header("Location: create_level.php");
 }
 
 ?>

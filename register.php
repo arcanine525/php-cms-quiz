@@ -8,9 +8,12 @@ if (isset($_POST['submit'])){
     $name = $_POST['name'];
     $surname = $_POST['surname'];
     $email = $_POST['email'];
+
+    global $MY_KEY;
+    $en_password = md5($password1.$MY_KEY);
     
     if($password1 == $password2){
-        $query = "INSERT INTO users(username, password, name, surname, email) VALUES ('$username','$password1','$name','$surname','$email')";
+        $query = "INSERT INTO users(username, password, name, surname, email) VALUES ('$username','$en_password','$name','$surname','$email')";
         $insert_row = $mysqli->query($query) or die($mysqli->error.__LINE__);
         $_SESSION['username'] = $username;
         header("Location: login.php");
@@ -40,11 +43,11 @@ if (isset($_POST['submit'])){
            <div class="row">
                <a href="index.html" ><img src="resources/img/logo.png" alt="Omnifood logo" class="logo"></a>
                <ul class="main-nav">
-                   <li><a href="index.php#why-usId">Why us </a></li>
+                   <!-- <li><a href="index.php#why-usId">Why us </a></li>
                    <li><a href="index.php#how-it-workId">How it works </a></li>
                    <li><a href="index.php#companiesId">Companies </a></li>
                    <li><a href="index.php#pricingId">Pricing</a></li>
-                   <li><a href="register.php">Sign up </a></li>
+                   <li><a href="register.php">Sign up </a></li> -->
                    <li><a href="login.php">Log in</a></li>
                    
                </ul>

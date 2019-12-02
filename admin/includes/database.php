@@ -1,4 +1,5 @@
 <?php 
+$MY_KEY = "xyz";
 
 //Create connection credentials
 $db_host = 'localhost';

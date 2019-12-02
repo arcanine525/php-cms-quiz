@@ -7,13 +7,17 @@ if(isset($_POST['user'])){
     $user=$_POST['user'];
     $pass=$_POST['password'];
     
-    $query = "SELECT * FROM users WHERE username='".$user."' AND password='".$pass."' LIMIT 1 ";
+    global $MY_KEY;
+    $en_password = md5($pass.$MY_KEY);
+    
+    $query = "SELECT * FROM users WHERE username='".$user."' AND password='".$en_password."' LIMIT 1 ";
     
     $result = $mysqli->query($query) or die($mysqli->error.__Line__);
     
     if(mysqli_num_rows($result)==1){
         echo "<h1> you have successfully logged in </h1>";
-        header("Location: quiz.php");
+        // header("Location: quiz.php");
+        header("Location: home.php");
         $_SESSION['user_name']=$user;
         
     }
@@ -39,12 +43,12 @@ if(isset($_POST['user'])){
 <body style="background-color: #1c2732">
   <nav>
            <div class="row">
-               <a href="index.html" ><img src="resources/img/logo.png" alt="Omnifood logo" class="logo"></a>
+               <a href="index.php" ><img src="resources/img/logo.png" alt="Omnifood logo" class="logo"></a>
                <ul class="main-nav">
-                   <li><a href="index.php#why-usId">Why us </a></li>
+                   <!-- <li><a href="index.php#why-usId">Why us </a></li>
                    <li><a href="index.php#how-it-workId">How it works </a></li>
                    <li><a href="index.php#companiesId">Companies </a></li>
-                   <li><a href="index.php#pricingId">Pricing</a></li>
+                   <li><a href="index.php#pricingId">Pricing</a></li> -->
                    <li><a href="register.php">Sign up </a></li>
                    <li><a href="login.php">Log in</a></li>
                    

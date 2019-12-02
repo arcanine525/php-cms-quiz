@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
 //    echo "<h1> {$quiz_category} </h1>";
     
     //Question query
-    $query = "INSERT INTO questions(question_number, text) VALUES('$question_number','$question_text')";
+    // $query = "INSERT INTO questions(question_number, text) VALUES('$question_number','$question_text')";
     $query_quiz = "INSERT INTO quiz(question_number, title, category, content, quiz_image, user_id) VALUES ('$question_number','$quiz_title','$quiz_category' , '$quiz_content', '$quiz_image', '$user_id')";
     
     //Run query
@@ -47,29 +47,29 @@ if(isset($_POST['submit'])){
     $insert_row_quiz = $mysqli->query($query_quiz) or die($mysqli->error.__LINE__);
     
     //Validate insert przywieza czy nie ma pustyx miejsc
-    if($insert_row){
-        foreach($choices as $choice => $value){
-            if($value != ''){
-                if($correct_choice==$choice){
-                    $is_correct=1;
-                }else{
-                    $is_correct=0;
-                }
-                //Choice query
-                $query="INSERT INTO choices(question_number, is_correct, text) VALUES ('$question_number','$is_correct','$value')";
+    // if($insert_row){
+    //     foreach($choices as $choice => $value){
+    //         if($value != ''){
+    //             if($correct_choice==$choice){
+    //                 $is_correct=1;
+    //             }else{
+    //                 $is_correct=0;
+    //             }
+    //             //Choice query
+    //             $query="INSERT INTO choices(question_number, is_correct, text) VALUES ('$question_number','$is_correct','$value')";
                 
-                //Run query
-                $insert_row = $mysqli->query($query) or die($mysqli->error.__LINE__);
+    //             //Run query
+    //             $insert_row = $mysqli->query($query) or die($mysqli->error.__LINE__);
                 
-                if($insert_row){
-                    continue;
-                }else {
-                    die('Error: ('.$mysqli-errno .')'. $mysqli_error);
-                }
-            }
-        }
-        $msg = 'Question has been added';
-    }
+    //             if($insert_row){
+    //                 continue;
+    //             }else {
+    //                 die('Error: ('.$mysqli-errno .')'. $mysqli_error);
+    //             }
+    //         }
+    //     }
+    //     $msg = 'Question has been added';
+    // }
 }
 
 //Get total number
@@ -109,24 +109,24 @@ if(isset($_POST['done'])){
                         <form action="add.php" method="post" enctype="multipart/form-data">  
                            
                             <div class="form-group">
-                                <label for="question_number">Question Number</label>
-                                <input type="number" value="<?php echo $next; ?>" name="question_number">
+                                <label for="question_number">Question Number </label>
+                                <input disabled type="number" value="<?php echo $next; ?>" name="question_number">
                             </div>
 
                             <div class="form-group">
                                 <label for="title">Quiz Title</label>
-                                <input type="text" class="form-control" name="title" value="<?php echo $_SESSION['quiz_title']; ?>">
+                                <input disabled type="text" class="form-control" name="title" value="<?php echo $_SESSION['quiz_title']; ?>">
                             </div>
                             
                             <div class="form-group">
                                 <label for="cat_id">Quiz Category</label>
-                                <input type="text" class="form-control" name="category" value="<?php echo $_SESSION['cat_title']; ?>">
+                                <input disabled type="text" class="form-control" name="category" value="<?php echo $_SESSION['cat_title']; ?>">
                             </div>
                                
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="title">Quiz Text</label>
                                 <input type="text" class="form-control" name="question_text">
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
                                 <label for="choice1">Choice #1</label>
@@ -154,8 +154,18 @@ if(isset($_POST['done'])){
                             </div>
 
                             <div class="form-group">
-                                <label for="correct_choice">Correct Choice Number</label>
+                                <!-- <label for="correct_choice">Correct Choice Number</label>
                                 <input type="number" class="form-control" name="correct_choice">
+                                <label for="level">Select difficult: </label>
+                                <label for="level">Select difficult: </label> -->
+                                <label for="correct_choice">Correct Choice Number</label>
+                                <select id="correct_choice" name="correct_choice">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
                             </div>
                             
                             <div class="form-group">
