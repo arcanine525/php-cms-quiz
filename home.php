@@ -1,12 +1,21 @@
 <?php include("admin/includes/database.php") ?>
 <?php session_start(); ?>
 <?php
+  // topics
     $query_topics = "SELECT * FROM category";
     
     $r_topics = $mysqli->query($query_topics) or die($mysqli->error.__Line__);
 
     while ($row = $r_topics->fetch_assoc()) {
         $topics[] = $row['name'];
+    }
+  // levels
+    $query_levels = "SELECT * FROM levels";
+    
+    $r_levels = $mysqli->query($query_levels) or die($mysqli->error.__Line__);
+
+    while ($row = $r_levels->fetch_assoc()) {
+        $levels[] = $row['name'];
     }
 ?>
 <head>
@@ -48,17 +57,21 @@
         <!-- /.container -->
 </nav>
 <div>
-  <form action="test.php">
+  <form action="quiz.php">
 
     <label for="level">Select difficult: </label>
     <select id="level" name="level">
-      <option value="easy">Easy</option>
-      <option value="medium">Medium</option>
-      <option value="hard">Hard</option>
+    <?php
+    foreach($levels as $level){
+        echo "<option value=$level>";
+        echo $level;
+        echo "</option>";
+    }
+    ?>
     </select>
 
     <label for="topic">Select topic: </label>
-    <select id="topic" name="level">
+    <select id="topic" name="topic">
     <?php
     foreach($topics as $topic){
         echo "<option value=$topic>";
@@ -66,9 +79,6 @@
         echo "</option>";
     }
     ?>
-      <!-- <option value="easy">Easy</option>
-      <option value="medium">Medium</option>
-      <option value="hard">Hard</option> -->
     </select>
   
     <input type="submit" value="Do the test">

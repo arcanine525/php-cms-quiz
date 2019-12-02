@@ -57,97 +57,65 @@
                 </h1>
 <?php
 
-$query = "SELECT * FROM quiz GROUP BY title ORDER BY id";
+$query = "SELECT * FROM quiz GROUP BY title ORDER BY RAND ()  LIMIT 1 ;";
+
+
 $select_all_quizes = $mysqli->query($query) or die($mysqli->error.__LINE__);
 
+//Render questions
+echo "<ol>";
 while($row = mysqli_fetch_assoc($select_all_quizes)){
     $quiz_title = $row['title'];
     $quiz_number = $row['question_number'];
     $quiz_content = $row['content'];
     $user_id = $row['user_id'];
     $quiz_image = $row['quiz_image'];
-    
-    echo "<h2>  {$quiz_title} </h2>";
+
+    // Choices:
+    $query_choices = "SELECT * FROM choices WHERE question_number = $quiz_number";
+    $choices = $mysqli->query($query_choices) or die($mysqli->error.__LINE__);
+
+    echo "<li>";
+    echo "<h4>  {$quiz_title} </h4>";
     
     $query = "SELECT * FROM users WHERE id='".$user_id."' ";
     $user_name = $mysqli->query($query) or die($mysqli->error.__LINE__);
     $row_user = mysqli_fetch_assoc($user_name);
     $user_name_db = $row_user['username'];
     
-    echo "<p class='lead'> by  {$user_name_db}  </p>";
-    echo "<hr> <img class='img-responsive' src='admin/quiz-images/{$quiz_image}' alt=''><hr>";
-    echo "<h3> Quiz content </h3> <br>";
-    echo "<h4> {$quiz_content} <h4>";
-    echo "<a class='btn btn-primary' href='question.php?n={$quiz_number}'>
-    Challenge <span class='glyphicon glyphicon-chevron-right'></span></a> <hr>";
-      
-}              
+    // echo "<p class='lead'> by  {$user_name_db}  </p>";
+    // echo "<hr> <img class='img-responsive' src='admin/quiz-images/{$quiz_image}' alt=''><hr>";
+    // echo "<h4> Quiz content </h4> <br>";
+    echo "<h5> {$quiz_content} <h5>";
+    // echo "<a class='btn btn-primary' href='question.php?n={$quiz_number}'>
+    // Challenge <span class='glyphicon glyphicon-chevron-right'></span></a> <hr>";
 ?>
-                <!-- First Blog Post -->
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
+            <form action="process.php" method="post">
+                <ul style="list-style-type:none;">
+                   <?php while($row = $choices->fetch_assoc()) : ?>
+
+                    <li><input name="choice" type="radio" value="<?php echo $row['id']; ?>"> <?php echo $row['text'] ?> </li>
+                    
+                    <?php endwhile; ?>
                 </ul>
-
-            </div>
-
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Blog Search Well -->
-               
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Quiz Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ul class="list-unstyled">
-                                <?php
-$query = "SELECT * FROM category";
-$category = $mysqli->query($query) or die($mysqli->error.__Line__);
-
-while ($row = mysqli_fetch_assoc($category)){
-
-    //$cat_id = $row['cat_id'];
-    $cat_title = $row['cat_title'];
-    echo "<li > <a href='category.php?category=$cat_title'>{$cat_title}</a> </li>";
-    
-}
-                                ?>
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-                        
-                        <!-- /.col-lg-6 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-                <!-- Side Widget Well -->
-                
-
-            </div>
-
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
+                <input type="submit" name="submit" value="Submit">
+                <input type="hidden" name="number" value="<?php echo $number; ?>">
+                <!-- <label for="correct_choice">Username</label> -->
+                <input type="hidden" class="form-control" name="user" value="<?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?>"> 
+            </form>
+<?php
+    echo "</li>";
+      
+} 
+echo "</ol>";             
+?>
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
                     <p>Copyright &copy; Project Q 2019</p>
                 </div>
-                <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
         </footer>
 
     </div>

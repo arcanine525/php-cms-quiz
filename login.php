@@ -19,6 +19,10 @@ if(isset($_POST['user'])){
         // header("Location: quiz.php");
         header("Location: home.php");
         $_SESSION['user_name']=$user;
+
+        $cookie_name = "username";
+        $cookie_value = $user;
+        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
         
     }
     else{
