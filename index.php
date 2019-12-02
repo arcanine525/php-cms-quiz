@@ -56,7 +56,36 @@ if (isset($_COOKIE['username'])) {
         </div>
     </header>
     <section class="section-features js--section-features" id="why-usid">
-
+        <div class="row" >
+           
+            <h2>New way &mdash; better experience.</h2>
+            <p class="long-copy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida enim enim, at molestie elit sagittis ac. Vivamus vehicula quam elit, at fringilla arcu maximus nec.</p>
+        </div>
+        <div class="row js--wp-1">
+           <!-- col klasa z grid.css, dodajim klasa box zeb css zrobic, nigdy nie mieniami col span z grida!!!!! -->
+		   
+           <div class="col span-1-of-4 box">
+               <i class="ion-ios-color-wand-outline icon-big"></i>
+                <h3>New experience</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida enim enim, at molestie elit sagittis ac. Vivamus vehicula quam elit, at fringilla arcu maximus nec.</p>
+            </div>
+            <div class="col span-1-of-4 box">
+               <i class="ion-ios-pricetag-outline icon-big"></i>
+                <h3>Good pricing</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida enim enim, at molestie elit sagittis ac. Vivamus vehicula quam elit, at fringilla arcu maximus nec.</p>
+            </div>
+            <div class="col span-1-of-4 box">
+               <i class="ion-ios-chatboxes-outline icon-big"></i>
+                <h3>24/7 support</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida enim enim, at molestie elit sagittis ac. Vivamus vehicula quam elit, at fringilla arcu maximus nec.</p>
+            </div>
+            <div class="col span-1-of-4 box">
+               <i class="ion-ios-cart-outline icon-big"></i>
+                <h3>Full refund</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida enim enim, at molestie elit sagittis ac. Vivamus vehicula quam elit, at fringilla arcu maximus nec.</p>
+            </div>
+            
+        </div>
     </section>
     
     
