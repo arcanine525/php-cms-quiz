@@ -25,6 +25,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="vendors/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="vendors/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="vendors/css/ionicons.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400,400i" rel="stylesheet">
 
     <title>Project Q</title>
 
@@ -33,6 +39,9 @@
 
     <!-- Custom CSS -->
     <link href="css/blog-home.css" rel="stylesheet">
+    <style>
+        
+    </style>
 </head>
 
 <body>
@@ -56,9 +65,9 @@
         </div>
         <!-- /.container -->
 </nav>
-<div>
-  <form action="quiz.php">
 
+  <form action="quiz.php" class="box-log-in">
+    <fieldset>
     <label for="level">Select difficult: </label>
     <select id="level" name="level">
     <?php
@@ -69,7 +78,7 @@
     }
     ?>
     </select>
-
+    <br><br>
     <label for="topic">Select topic: </label>
     <select id="topic" name="topic">
     <?php
@@ -80,8 +89,10 @@
     }
     ?>
     </select>
-  
+    <br><br>
     <input type="submit" value="Do the test">
+</fieldset>
   </form>
-</div>
+
+
 </body>

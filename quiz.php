@@ -4,7 +4,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,7 +56,15 @@
                 </h1>
 <?php
 
-$query = "SELECT * FROM quiz GROUP BY title ORDER BY RAND ()  LIMIT 1 ;";
+$level = $_GET['level'];
+$category = $_GET['topic'];
+
+// Re-cofing db
+if ($level == 'Hard'){
+    $query = "SELECT * FROM quiz GROUP BY id ORDER BY RAND ()  LIMIT 10 ";
+}else{
+    $query = "SELECT * FROM quiz GROUP BY id ORDER BY RAND ()  LIMIT 5 ";
+}
 
 
 $select_all_quizes = $mysqli->query($query) or die($mysqli->error.__LINE__);

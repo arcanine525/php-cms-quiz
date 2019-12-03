@@ -55,16 +55,16 @@ if (isset($_COOKIE['username'])) {
             <a class="btn btn-ghost btn-header" href="register.php">Free account</a>
         </div>
     </header>
-    <section class="section-features js--section-features" id="why-usid">
-        <div class="row" >
+    <!-- <section class="section-features js--section-features" id="why-usid"> -->
+        <!-- <div class="row" >
            
             <h2>New way &mdash; better experience.</h2>
             <p class="long-copy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida enim enim, at molestie elit sagittis ac. Vivamus vehicula quam elit, at fringilla arcu maximus nec.</p>
         </div>
-        <div class="row js--wp-1">
+        <div class="row js--wp-1"> -->
            <!-- col klasa z grid.css, dodajim klasa box zeb css zrobic, nigdy nie mieniami col span z grida!!!!! -->
 		   
-           <div class="col span-1-of-4 box">
+           <!-- <div class="col span-1-of-4 box">
                <i class="ion-ios-color-wand-outline icon-big"></i>
                 <h3>New experience</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida enim enim, at molestie elit sagittis ac. Vivamus vehicula quam elit, at fringilla arcu maximus nec.</p>
@@ -83,10 +83,10 @@ if (isset($_COOKIE['username'])) {
                <i class="ion-ios-cart-outline icon-big"></i>
                 <h3>Full refund</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida enim enim, at molestie elit sagittis ac. Vivamus vehicula quam elit, at fringilla arcu maximus nec.</p>
-            </div>
+            </div> -->
             
-        </div>
-    </section>
+        <!-- </div>
+    </section> -->
     
     
     <section class="section-steps">
