@@ -2,21 +2,26 @@
 <?php session_start(); ?>
 <?php
   // topics
-    $query_topics = "SELECT * FROM category";
+//     $query_topics = "SELECT * FROM category";
     
-    $r_topics = $mysqli->query($query_topics) or die($mysqli->error.__Line__);
+//     $r_topics = $mysqli->query($query_topics) or die($mysqli->error.__Line__);
 
-    while ($row = $r_topics->fetch_assoc()) {
-        $topics[] = $row['name'];
-    }
-  // levels
-    $query_levels = "SELECT * FROM levels";
+//     while ($row = $r_topics->fetch_assoc()) {
+//         $topics[] = $row['name'];
+//     }
+//   // levels
+//     $query_levels = "SELECT * FROM levels";
     
-    $r_levels = $mysqli->query($query_levels) or die($mysqli->error.__Line__);
+//     $r_levels = $mysqli->query($query_levels) or die($mysqli->error.__Line__);
 
-    while ($row = $r_levels->fetch_assoc()) {
-        $levels[] = $row['name'];
-    }
+//     while ($row = $r_levels->fetch_assoc()) {
+//         $levels[] = $row['name'];
+//     }
+if (isset($_COOKIE['username'])) {
+    // header("Location: home.php");
+}else{
+    header("Location: index.php");
+}
 ?>
 <head>
 
@@ -55,9 +60,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="admin/index.php">Admin</a>
-                <a class="navbar-brand" href="quiz.php">Home</a>
-                <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
+                <?php
+                        // Get userid from cookie
+                $user = $_COOKIE['username'];
+                $query = "SELECT * FROM users WHERE username='".$user."' LIMIT 1";
+                $result = $mysqli->query($query) or die($mysqli->error.__Line__);
+                $row = $result->fetch_assoc();
+                $privi = $row['privileges'];
+                    // if($_SESSION['privi'] == 1)
+                    if($privi == 1)
+                        echo ' <a class="navbar-brand" href="admin/index.php">Admin</a>';
+                ?>
+                <a class="navbar-brand" href="home.php">Home</a>
+                <a class="navbar-brand" href="#"><?php echo $_COOKIE['username']; ?></a>
+                <a class="navbar-brand pull-right" href="logout.php">Log out</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             
@@ -71,10 +87,19 @@
     <label for="level">Select difficult: </label>
     <select id="level" name="level">
     <?php
-    foreach($levels as $level){
-        echo "<option value=$level>";
-        echo $level;
-        echo "</option>";
+    
+    // foreach($levels as $level){
+    //     echo "<option value=$level>";
+    //     echo $level;
+    //     echo "</option>";
+    // }
+    $query = "SELECT * FROM levels";
+    $levels = $mysqli->query($query) or die($mysqli->error.__Line__);
+     
+    while ($row = mysqli_fetch_assoc($levels)){
+        $level_id = $row['id'];
+        $level = $row['name'];
+        echo "<option value='{$level_id}'>{$level}</option>";
     }
     ?>
     </select>
@@ -82,10 +107,18 @@
     <label for="topic">Select topic: </label>
     <select id="topic" name="topic">
     <?php
-    foreach($topics as $topic){
-        echo "<option value=$topic>";
-        echo $topic;
-        echo "</option>";
+    // foreach($topics as $topic){
+    //     echo "<option value=$topic>";
+    //     echo $topic;
+    //     echo "</option>";
+    // }
+    $query = "SELECT * FROM category";
+    $category = $mysqli->query($query) or die($mysqli->error.__Line__);
+    
+    while ($row = mysqli_fetch_assoc($category)){
+        $cat_id = $row['id'];
+        $cat_title = $row['name'];
+        echo "<option value='{$cat_id}'>{$cat_title}</option>";
     }
     ?>
     </select>

@@ -52,18 +52,18 @@ if(isset($_POST['submit'])){
 
 }
 
-//Get total number
-$query = "SELECT * FROM questions ";
+// //Get total number
+// $query = "SELECT * FROM questions ";
 
-//Get result
-$questions = $mysqli->query($query) or die($mysqli->error.__Line__);
-$total= $questions->num_rows;
+// //Get result
+// $questions = $mysqli->query($query) or die($mysqli->error.__Line__);
+// $total= $questions->num_rows;
 
-$next = $total+1;
+// $next = $total+1;
 
-if(isset($_POST['done'])){
-    header("Location: index.php");
-}
+// if(isset($_POST['done'])){
+//     header("Location: index.php");
+// }
 
 ?>
    

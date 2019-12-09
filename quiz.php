@@ -17,6 +17,18 @@
 
     <!-- Custom CSS -->
     <link href="css/blog-home.css" rel="stylesheet">
+    <style>
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -32,9 +44,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="admin/index.php">Admin</a>
-                <a class="navbar-brand" href="quiz.php">Home</a>
-                <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
+                <?php
+                        // Get userid from cookie
+                $user = $_COOKIE['username'];
+                $query = "SELECT * FROM users WHERE username='".$user."' LIMIT 1";
+                $result = $mysqli->query($query) or die($mysqli->error.__Line__);
+                $row = $result->fetch_assoc();
+                $privi = $row['privileges'];
+                    // if($_SESSION['privi'] == 1)
+                    if($privi == 1)
+                        echo ' <a class="navbar-brand" href="admin/index.php">Admin</a>';
+                ?>
+                <a class="navbar-brand" href="home.php">Home</a>
+                <a class="navbar-brand" href="#"><?php echo $_COOKIE['username']; ?></a>
+                <a class="navbar-brand pull-right" href="logout.php">Log out</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             
@@ -45,75 +68,61 @@
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
-
-            <!-- Blog Entries Column -->
             <div class="col-md-8">
-            <h1 class="page-header">
-                    Quizes
-                    
-                </h1>
+            <h1 class="page-header">Quizes</h1>
+            <form action="results.php" method="POST" class="box-log-in">
 <?php
 
 $level = $_GET['level'];
 $category = $_GET['topic'];
+$number_quiz = 10;
 
-// Re-cofing db
-if ($level == 'Hard'){
-    $query = "SELECT * FROM quiz GROUP BY id ORDER BY RAND ()  LIMIT 10 ";
-}else{
-    $query = "SELECT * FROM quiz GROUP BY id ORDER BY RAND ()  LIMIT 5 ";
-}
-
-
+$query = "SELECT * FROM quizzes WHERE category='".$category."' AND level='".$level."' ORDER BY RAND () LIMIT $number_quiz ";
 $select_all_quizes = $mysqli->query($query) or die($mysqli->error.__LINE__);
 
 //Render questions
+
 echo "<ol>";
 while($row = mysqli_fetch_assoc($select_all_quizes)){
+    $quiz_id = $row['id'];
     $quiz_title = $row['title'];
-    $quiz_number = $row['question_number'];
     $quiz_content = $row['content'];
-    $user_id = $row['user_id'];
-    $quiz_image = $row['quiz_image'];
+    // $user_id = $row['user_id'];
+    // $quiz_image = $row['quiz_image'];
 
     // Choices:
-    $query_choices = "SELECT * FROM choices WHERE question_number = $quiz_number";
-    $choices = $mysqli->query($query_choices) or die($mysqli->error.__LINE__);
+    $choices = array();
+    $choices[1] = $row['choice1'];
+    $choices[2] = $row['choice2'];
+    $choices[3] = $row['choice3'];
+    $choices[4] = $row['choice4'];
+    $choices[5] = $row['choice5'];
 
-    echo "<li>";
-    echo "<h4>  {$quiz_title} </h4>";
+    echo "<h4><li>";
+    echo "  {$quiz_title} </h4>";
     
-    $query = "SELECT * FROM users WHERE id='".$user_id."' ";
-    $user_name = $mysqli->query($query) or die($mysqli->error.__LINE__);
-    $row_user = mysqli_fetch_assoc($user_name);
-    $user_name_db = $row_user['username'];
+    // $query = "SELECT * FROM users WHERE id='".$user_id."' ";
+    // $user_name = $mysqli->query($query) or die($mysqli->error.__LINE__);
+    // $row_user = mysqli_fetch_assoc($user_name);
+    // $user_name_db = $row_user['username'];
     
-    // echo "<p class='lead'> by  {$user_name_db}  </p>";
-    // echo "<hr> <img class='img-responsive' src='admin/quiz-images/{$quiz_image}' alt=''><hr>";
-    // echo "<h4> Quiz content </h4> <br>";
-    echo "<h5> {$quiz_content} <h5>";
-    // echo "<a class='btn btn-primary' href='question.php?n={$quiz_number}'>
-    // Challenge <span class='glyphicon glyphicon-chevron-right'></span></a> <hr>";
-?>
-            <form action="process.php" method="post">
+    echo "<h5> {$quiz_content} <h5>";?>
                 <ul style="list-style-type:none;">
-                   <?php while($row = $choices->fetch_assoc()) : ?>
-
-                    <li><input name="choice" type="radio" value="<?php echo $row['id']; ?>"> <?php echo $row['text'] ?> </li>
-                    
-                    <?php endwhile; ?>
+                <input type="radio" name="<?php echo $quiz_id; ?>"" value="<?php echo $choices[1]; ?>" > <?php echo $choices[1] ?><br>
+                <input type="radio" name="<?php echo $quiz_id; ?>"" value="<?php echo $choices[2]; ?>" > <?php echo $choices[2] ?><br>
+                <input type="radio" name="<?php echo $quiz_id; ?>"" value="<?php echo $choices[3]; ?>" > <?php echo $choices[3] ?><br>
+                <input type="radio" name="<?php echo $quiz_id; ?>"" value="<?php echo $choices[4]; ?>" > <?php echo $choices[4] ?><br>
                 </ul>
-                <input type="submit" name="submit" value="Submit">
-                <input type="hidden" name="number" value="<?php echo $number; ?>">
                 <!-- <label for="correct_choice">Username</label> -->
-                <input type="hidden" class="form-control" name="user" value="<?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?>"> 
+                <!-- <input type="hidden" class="form-control" name="user" value="<?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?>">  -->
+                
             </form>
 <?php
     echo "</li>";
       
 } 
+echo '<input type="submit" class="start">';
 echo "</ol>";             
 ?>
         <!-- Footer -->

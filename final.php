@@ -1,7 +1,7 @@
 <?php include("admin/includes/database.php") ?>
 <?php session_start(); ?>
 <?php 
-
+ 
 $username = $_SESSION['user_name_score'];
 $quiz_title = $_SESSION['quiz_title_score'];
 

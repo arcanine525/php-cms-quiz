@@ -73,7 +73,6 @@ $query = "SELECT * FROM levels";
 $levels = $mysqli->query($query) or die($mysqli->error.__Line__);
 
 while ($row = mysqli_fetch_assoc($levels)){
-    
     $level_id = $row['id'];
     $level = $row['name'];
     echo "<option value='{$level_id}'>{$level}</option>";

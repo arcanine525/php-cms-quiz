@@ -29,21 +29,25 @@
                                 </thead>
                                 
 <?php 
-    
-    
-$query_user = "SELECT * FROM users WHERE username = '".$_SESSION['user_name']."' ";
-$user_id = $mysqli->query($query_user) or die($mysqli->error.__Line__);
-$id_user = $row['id'];
-$query_score = "SELECT * FROM result WHERE creator_id = '".$id_user."' ";
+     
+// $query_user = "SELECT * FROM users WHERE username = '".$_SESSION['user_name']."' ";
+// $user_id = $mysqli->query($query_user) or die($mysqli->error.__Line__);
+// $id_user = $row['id'];
+$query_score = "SELECT * FROM result";
 $result = $mysqli->query($query_score) or die($mysqli->error.__Line__);
 
 while ($row = mysqli_fetch_assoc($result)){
-    $quiz_title = $row['question_title'];
-    $username = $row['username'];
+    $query_user = "SELECT * FROM users WHERE id = '".$row['user_id']."' LIMIT 1 ";
+    $user = $mysqli->query($query_user) or die($mysqli->error.__Line__);
+    $row1 = $user->fetch_assoc();
+    $username = $row1['username'];
+
+    $quiz_time = $row['time'];
+    $user_id = $row['id'];
     $user_result = $row['score'];
     
     echo "<tr>";
-    echo "<td> {$quiz_title} </td>";
+    echo "<td> {$quiz_time} </td>";
     echo "<td> {$username} </td>";
     echo "<td> {$user_result} </td>";
     echo "</tr>";
