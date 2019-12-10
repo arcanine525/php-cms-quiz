@@ -59,6 +59,17 @@
     <title>Project Q</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 40;
+  width: 100%;
+  /* background-color: red;
+  color: white; */
+  text-align: center;
+}
+</style>
 <body>
     <header>
         <div class="container">
@@ -68,14 +79,14 @@
     <main>
         <div class="container">
             <h2>You're Done!</h2>
-            <p>Congrats! you have completed the test</p>
+            <p>Congrats! You have completed the test</p>
             
             <p>Final Score: <?php echo $score; ?></p>
             <a href="index.php" class="start">Go back</a>
         </div>
     </main>
     <footer>
-        <div class="container">
+        <div class="footer">
             Copyright &copy; 2019, Project Q
         </div>
     </footer>

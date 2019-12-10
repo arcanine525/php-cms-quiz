@@ -113,6 +113,7 @@ while($row = mysqli_fetch_assoc($select_all_quizes)){
                 <input type="radio" name="<?php echo $quiz_id; ?>"" value="<?php echo $choices[2]; ?>" > <?php echo $choices[2] ?><br>
                 <input type="radio" name="<?php echo $quiz_id; ?>"" value="<?php echo $choices[3]; ?>" > <?php echo $choices[3] ?><br>
                 <input type="radio" name="<?php echo $quiz_id; ?>"" value="<?php echo $choices[4]; ?>" > <?php echo $choices[4] ?><br>
+                <input type="radio" name="<?php echo $quiz_id; ?>"" value="<?php echo $choices[5]; ?>" > <?php echo $choices[5] ?><br>
                 </ul>
                 <!-- <label for="correct_choice">Username</label> -->
                 <!-- <input type="hidden" class="form-control" name="user" value="<?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?>">  -->

@@ -1,5 +1,6 @@
 <?php include("includes/header.php") ?>
-<?php //session_start() ?>
+<?php 
+session_start() ?>
 
     <div id="wrapper">
 
